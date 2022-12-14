@@ -34,7 +34,7 @@ export const CurrencyConverter = () => {
     }else setCurrencyValue(value)
 
     if(input_value.length >= 4 && input_value[3].length === 3){
-      dispatch(GetCurrentRate({value1: input_value[1], value2: input_value[3]}))
+      dispatch(GetCurrentRate({currency1: input_value[1], currency2: input_value[3]}))
     }else{
       dispatch(clearCurrentCurrencyValue())
     }

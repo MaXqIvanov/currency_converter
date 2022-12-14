@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import ConverterSlice from './reducers/converter/ConverterSlice';
+import ExchangeSlice from './reducers/exchange_rates/ExchangeSlice';
 
 const rootReducer = combineReducers({
   converter: ConverterSlice,
+  exchange: ExchangeSlice
 });
 
 export const setupStore = () => {

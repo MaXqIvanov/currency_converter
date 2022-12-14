@@ -1,6 +1,20 @@
 $background_main: rgb(26,31,37);
 $color_main: white;
 $color_hover: rgb(86, 255, 244);
+$color_select: rgb(66, 66, 66);
+*::-webkit-scrollbar {
+  width: 7px; /* ширина scrollbar */
+  height: 9px;
+}
+*::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255); /* цвет дорожки */
+  border-radius: 25px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #b3e3fb; /* цвет плашки */
+  border-radius: 20px; /* закругления плашки */
+  border: 3px solid #b3e3fb;  /* padding вокруг плашки */
+}
 .App {
   height: 100%;
   min-height: 100vh;
@@ -8,6 +22,36 @@ $color_hover: rgb(86, 255, 244);
   color: white;
   padding: 0px 0.9vw;
   box-sizing: border-box;
+}
+.loading_line{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 2px;
+  background-color: aqua;
+  animation: loading_line infinite linear 0.9s;
+}
+@keyframes loading_line {
+  0%{
+    width: 0vw;
+    transform: translateX(0px);
+  }
+  25%{
+    width: 10vw;
+    transform: translateX(25vw);
+  }
+  50%{
+    width: 20vw;
+    transform: translateX(50vw);
+  }
+  75%{
+    width: 10vw;
+    transform: translateX(75vw);
+  }
+  100%{
+    width: 0vw;
+    transform: translateX(100vw);
+  }
 }
 .header{
   height: 4vw;
@@ -90,4 +134,54 @@ $color_hover: rgb(86, 255, 244);
   display: flex;
   justify-content: center;
   align-items: center ;
+}
+
+// exchange_rates page
+.exchange_rates{
+  height: 100%;
+  min-height: calc(100vh - 4vw);
+  display: flex;
+  justify-content: center;
+}
+.custom_select{
+  position: relative;
+  margin-top: 5vw;
+  height: fit-content;
+  min-height: 30px;
+  padding: 1vw 1vw;
+  padding-right: 10px;
+  width: 30vw;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: white;
+  color: $color_select;
+  cursor: pointer;
+}
+.currency_list__options{
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  height: fit-content;
+  border: 1px solid white;
+  width: 30vw;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 1vw 1vw;
+  padding-right: 10px;
+  overflow: auto;
+  max-height: 42vh;
+  background: rgb(255, 255, 255);
+}
+.currency_list__option{
+  box-shadow: 0 4px 2px -3px rgb(83, 180, 183);
+  padding: 5px 5px;
+  box-sizing: border-box;
+  color: $color_select;
+}
+.currency_list__icons{
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translate(-50%, -50%);
 }
