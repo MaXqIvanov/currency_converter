@@ -50,8 +50,8 @@ export const CurrencyConverter = () => {
         <div className='currency_converter__results'>{current_currency_value}
           {loading_currency && <ImSpinner className='spinner'/>}
         </div>
+        {error && <div className='error'>{error}</div>}
       </div>
-      {error && <div className='error'>{error}</div>}
     </div>
   )
 }

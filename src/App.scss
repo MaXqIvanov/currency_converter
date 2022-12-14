@@ -2,6 +2,7 @@ $background_main: rgb(26,31,37);
 $color_main: white;
 $color_hover: rgb(86, 255, 244);
 $color_select: rgb(66, 66, 66);
+$color_error: rgb(255, 68, 68);
 *::-webkit-scrollbar {
   width: 7px; /* ширина scrollbar */
   height: 9px;
@@ -125,12 +126,15 @@ $color_select: rgb(66, 66, 66);
   }
 }
 .error{
+  position: absolute;
+  top: 3.6vw;
+  left: 0.2vw;
   font-size: 1vw;
-  color: red;
+  color: $color_error;
   width: 57vw;
-  margin-top: 0.5vw;
 }
 .currency_converter__wrapper{
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center ;
