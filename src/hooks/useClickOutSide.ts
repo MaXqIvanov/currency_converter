@@ -4,7 +4,7 @@ const useClickOutSide = (handler: () => void) => {
   const domNode = useRef() as MutableRefObject<HTMLInputElement>;
   useEffect(() => {
     const maybeHandler = (event: { target: EventTarget | null }) => {
-      let value = event.target as Node | null
+      const value = event.target as Node | null;
       if (!domNode.current.contains(value)) {
         handler();
       }

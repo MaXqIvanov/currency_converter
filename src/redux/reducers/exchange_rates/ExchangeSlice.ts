@@ -3,12 +3,12 @@ import { NavigateFunction } from 'react-router-dom';
 import { GetCurrentExchangeRates, GetExchangeRates } from './ActionExchange';
 
 export interface IExchangeState {
-    loading: boolean
-    currency_list_group: string[]
-    currency_list: string[]
-    currency_list_with_value: object[]
-    error: string | null
-    current_currency: string | null,
+  loading: boolean;
+  currency_list_group: string[];
+  currency_list: string[];
+  currency_list_with_value: object[];
+  error: string | null;
+  current_currency: string | null;
 }
 
 interface IPayloadGetExchangeRates {
@@ -28,36 +28,41 @@ const ExchangeSlice = createSlice({
     current_currency: null,
   },
   reducers: {
-    setCurrentCurrency(state: IExchangeState, action: {payload: {currency: string, navigate: NavigateFunction}}){
-        state.current_currency = action.payload.currency
-        action.payload.navigate(`/exchange_rates?rate=${action.payload.currency}`)
-    }
+    setCurrentCurrency(
+      state: IExchangeState,
+      action: { payload: { currency: string; navigate: NavigateFunction } }
+    ) {
+      state.current_currency = action.payload.currency;
+      action.payload.navigate(`/exchange_rates?rate=${action.payload.currency}`);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(GetExchangeRates.pending, (state: IExchangeState, action: PayloadAction) => {
       state.loading = true;
     });
     builder.addCase(
-        GetExchangeRates.fulfilled,
+      GetExchangeRates.fulfilled,
       (
         state: IExchangeState,
-        { payload }: PayloadAction<{
-            response: { data: IPayloadGetExchangeRates }
+        {
+          payload,
+        }: PayloadAction<{
+          response: { data: IPayloadGetExchangeRates };
         }>
       ) => {
-        console.log(payload)
-        let tmp_array: string[] = []
-        state.currency_list_group = payload.response.data.data
-        state.currency_list_group.forEach((element:string) => {
-            tmp_array.push(element.split('')[0] + element.split('')[1] + element.split('')[2])
-            tmp_array.push(element.split('')[3] + element.split('')[4] + element.split('')[5])
+        console.log(payload);
+        const tmp_array: string[] = [];
+        state.currency_list_group = payload.response.data.data;
+        state.currency_list_group.forEach((element: string) => {
+          tmp_array.push(element.split('')[0] + element.split('')[1] + element.split('')[2]);
+          tmp_array.push(element.split('')[3] + element.split('')[4] + element.split('')[5]);
         });
-        state.currency_list = Array.from(new Set(tmp_array))
-        let search = window.location.search.split('=')[1]
-        if(search){
-          state.current_currency = search
-        }else{
-          state.current_currency = state.currency_list[1]
+        state.currency_list = Array.from(new Set(tmp_array));
+        const search = window.location.search.split('=')[1];
+        if (search) {
+          state.current_currency = search;
+        } else {
+          state.current_currency = state.currency_list[1];
         }
         state.loading = false;
       }
@@ -66,26 +71,30 @@ const ExchangeSlice = createSlice({
       state.loading = false;
     });
     // GetCurrentExchangeRates
-    builder.addCase(GetCurrentExchangeRates.pending, (state: IExchangeState, action: PayloadAction) => {
-      state.loading = true;
-    });
+    builder.addCase(
+      GetCurrentExchangeRates.pending,
+      (state: IExchangeState, action: PayloadAction) => {
+        state.loading = true;
+      }
+    );
     builder.addCase(
       GetCurrentExchangeRates.fulfilled,
       (
         state: IExchangeState,
-        { payload }: PayloadAction<{
-            response: { data: IPayloadGetExchangeRates }
+        {
+          payload,
+        }: PayloadAction<{
+          response: { data: IPayloadGetExchangeRates };
         }>
       ) => {
-        console.log(payload.response.data.data)
-        state.currency_list_with_value = Object.entries(payload.response.data.data)
+        console.log(payload.response.data.data);
+        state.currency_list_with_value = Object.entries(payload.response.data.data);
         state.loading = false;
       }
     );
     builder.addCase(GetCurrentExchangeRates.rejected, (state: IExchangeState) => {
       state.loading = false;
     });
-
   },
 });
 
