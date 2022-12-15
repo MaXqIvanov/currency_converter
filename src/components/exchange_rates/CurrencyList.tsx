@@ -11,8 +11,8 @@ export const CurrencyList = () => {
           <div key={item[0] + index} className="currency_item">
             <div>1 {item[0].split('')[0] + item[0].split('')[1] + item[0].split('')[2]} </div>
             <div>
-              {' '}
-              = {item[1]} {item[0].split('')[3] + item[0].split('')[4] + item[0].split('')[5]}
+              <span> = </span>
+              {item[1]} {item[0].split('')[3] + item[0].split('')[4] + item[0].split('')[5]}
             </div>
           </div>
         ))}

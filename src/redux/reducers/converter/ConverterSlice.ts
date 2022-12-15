@@ -24,7 +24,7 @@ const ConverterSlice = createSlice({
   },
   reducers: {
     clearCurrentCurrencyValue(state: IConverterState) {
-      state.current_currency_value = '';
+      state.current_currency_value = null;
     },
   },
   extraReducers: (builder) => {

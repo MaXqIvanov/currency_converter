@@ -85,7 +85,9 @@ export const CurrencyConverter = () => {
         />
         <FaEquals className="icon_equals" />
         <div className="currency_converter__results">
-          {current_currency_value}
+          {current_currency_value === null
+            ? ''
+            : current_currency_value * Number(currency_value.split(' ')[0])}
           {loading_currency && <ImSpinner className="spinner" />}
         </div>
         {error && <div className="error">{error}</div>}
