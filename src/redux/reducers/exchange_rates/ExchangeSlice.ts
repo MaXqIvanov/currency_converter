@@ -32,6 +32,7 @@ const ExchangeSlice = createSlice({
       state: IExchangeState,
       action: { payload: { currency: string; navigate: NavigateFunction } }
     ) {
+      console.log(action.payload);
       state.current_currency = action.payload.currency;
       action.payload.navigate(`/exchange_rates?rate=${action.payload.currency}`);
     },

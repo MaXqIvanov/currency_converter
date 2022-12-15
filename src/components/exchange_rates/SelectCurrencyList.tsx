@@ -26,7 +26,11 @@ export const SelectCurrencyList = () => {
                 <div
                   key={item + index}
                   className="currency_list__option"
-                  onClick={() => dispatch(setCurrentCurrency({ currency: item, navigate }))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(setCurrentCurrency({ currency: item, navigate }));
+                    setIsVisibleOptions(false);
+                  }}
                 >
                   {item}
                 </div>
