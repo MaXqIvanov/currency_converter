@@ -18,13 +18,24 @@ export const GetCurrentExchangeRates = createAsyncThunk(
     const rootState = getState() as RootState;
     console.log(rootState.exchange.currency_list);
     console.log(rootState.exchange.current_currency);
-    const params = rootState.exchange.currency_list.reduce(
-      (acc: string, val: string, index: number) =>
-        index === 0
-          ? acc + (rootState.exchange.current_currency + val)
-          : acc + (',' + rootState.exchange.current_currency + val),
-      ''
-    );
+    let params = '';
+    const list_group: string[] = rootState.exchange.currency_list_group;
+    if (rootState.exchange.current_currency) {
+      for (let i = 0; i < rootState.exchange.currency_list.length; i++) {
+        for (let b = 0; b < list_group.length; b++) {
+          if (
+            list_group[b].includes(rootState.exchange.currency_list[i]) &&
+            list_group[b].includes(rootState.exchange.current_currency) &&
+            rootState.exchange.current_currency !== rootState.exchange.currency_list[i]
+          ) {
+            params =
+              params +
+              (rootState.exchange.current_currency + rootState.exchange.currency_list[i] + ',');
+          }
+        }
+      }
+    }
+
     const response = await api.get(`https://currate.ru/api/?get=rates&pairs=${params}`);
     console.log(response);
     return { response };

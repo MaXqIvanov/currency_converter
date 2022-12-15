@@ -25,7 +25,7 @@ export const ExchangeRates = () => {
   useEffect(() => {
     intervaExchange.current = setInterval(() => {
       dispatch(GetExchangeRates());
-    }, 60000);
+    }, 120000);
     return () => {
       clearInterval(intervaExchange.current);
     };
