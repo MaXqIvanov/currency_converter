@@ -22,8 +22,9 @@ export const SelectCurrencyList = () => {
         {is_visible_options && (
           <div ref={select_ref} className="currency_list__options">
             {currency_list?.length > 0 &&
-              currency_list.map((item: string) => (
+              currency_list.map((item: string, index: number) => (
                 <div
+                  key={item + index}
                   className="currency_list__option"
                   onClick={() => dispatch(setCurrentCurrency({ currency: item, navigate }))}
                 >

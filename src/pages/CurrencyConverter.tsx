@@ -63,8 +63,8 @@ export const CurrencyConverter = () => {
           {is_visible_info && (
             <div ref={infoRef} className="info_block__items">
               {currency_list_group?.length > 0 &&
-                currency_list_group.map((item: string) => (
-                  <div>
+                currency_list_group.map((item: string, index: number) => (
+                  <div key={item + index}>
                     {item.split('')[0] +
                       item.split('')[1] +
                       item.split('')[2] +
