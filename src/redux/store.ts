@@ -4,7 +4,7 @@ import ExchangeSlice from './reducers/exchange_rates/ExchangeSlice';
 
 const rootReducer = combineReducers({
   converter: ConverterSlice,
-  exchange: ExchangeSlice
+  exchange: ExchangeSlice,
 });
 
 export const setupStore = () => {

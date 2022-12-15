@@ -2,6 +2,7 @@ $background_main: rgb(26,31,37);
 $color_main: white;
 $color_hover: rgb(86, 255, 244);
 $color_select: rgb(66, 66, 66);
+$color_error: rgb(255, 68, 68);
 *::-webkit-scrollbar {
   width: 7px; /* ширина scrollbar */
   height: 9px;
@@ -22,6 +23,9 @@ $color_select: rgb(66, 66, 66);
   color: white;
   padding: 0px 0.9vw;
   box-sizing: border-box;
+  @media(max-width: 550px){
+    padding: 0px 1vh;
+  }
 }
 .loading_line{
   position: fixed;
@@ -58,12 +62,19 @@ $color_select: rgb(66, 66, 66);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media(max-width: 550px){
+    height: 4vh;
+  }
 }
 .logo{
   display: flex;
   align-items: center;
   font-size: 3.5vw;
   cursor: pointer;
+
+  @media(max-width: 550px){
+    font-size: 3.5vh;
+  }
 }
 .navigate{
   display: flex;
@@ -75,6 +86,10 @@ $color_select: rgb(66, 66, 66);
   transition: color linear 0.22s;
   &:hover{
     color: $color_hover;
+  }
+
+  @media(max-width: 550px){
+    font-size: 1.4vh;
   }
 }
 .current_navigate__active{
@@ -89,6 +104,10 @@ $color_select: rgb(66, 66, 66);
   height: 100%;
   min-height: calc(100vh - 4vw);
   width: 100%;
+
+  @media(max-width:550px){
+    min-height: calc(100vh - 4vh);
+  }
 }
 .custom_input{
   width: 25vw;
@@ -99,20 +118,41 @@ $color_select: rgb(66, 66, 66);
   &:focus{
     outline: 0px;
   }
+
+  @media(max-width: 550px){
+    width: 70vw;
+    padding: 1vw 2vw;
+    font-size: 3vh;
+  }
 }
 .currency_converter__results{
   width: 25vw;
   margin-top: 0.5vw;
   font-size: 2.5vw;
+  @media(max-width: 550px){
+    margin-top: 2vh;
+    width: 70vw;
+    font-size: 3vh;
+    text-align: center;
+  }
 }
 .icon_equals{
   margin: 0 1vw;
   font-size: 2.5vw;
+  @media(max-width: 550px){
+    margin-top: 4vh;
+    font-size: 3vh;
+    transform: rotate(90deg);
+  }
 }
 .spinner{
   font-size: 2.5vw;
   width: fit-content;
   animation: spinner_loading infinite linear 1s;
+
+  @media(max-width: 550px){
+    font-size: 3vh;
+  }
 }
 @keyframes spinner_loading {
   0%{
@@ -125,23 +165,70 @@ $color_select: rgb(66, 66, 66);
   }
 }
 .error{
+  position: absolute;
+  top: 3.6vw;
+  left: 0.2vw;
   font-size: 1vw;
-  color: red;
+  color: $color_error;
   width: 57vw;
-  margin-top: 0.5vw;
+
+  @media(max-width: 550px){
+    width: 70vw;
+    top: 5.5vh;
+    font-size: 1.7vh;
+  }
 }
 .currency_converter__wrapper{
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center ;
-}
 
+  @media(max-width: 550px){
+    flex-direction: column;
+  }
+}
+.info_block{
+    position: relative;
+    width: fit-content;
+    border-radius: 5px;
+    @media(max-width: 550px){
+      width: 70vw;
+    }
+}
+.info_block__items{
+  border-radius: 5px;
+  width: 10vw;
+  max-height: 20vh;
+  position: absolute;
+  bottom: 4vw;
+  left: -2vw;
+  height: fit-content;
+  background: white;
+  overflow: auto;
+  color: $color_select;
+  padding: 1vw 1vw;
+  box-sizing: border-box;
+  min-width: 50px;
+  font-size: 1.2vw;
+  @media(max-width: 550px){
+    font-size: 2vh;
+    width: 40vw;
+    bottom: 4vh;
+  }
+}
 // exchange_rates page
 .exchange_rates{
   height: 100%;
   min-height: calc(100vh - 4vw);
+  padding-bottom: 5vh;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  @media(max-width: 550px){
+    min-height: calc(100vh - 4vh);
+  }
 }
 .custom_select{
   position: relative;
@@ -156,13 +243,24 @@ $color_select: rgb(66, 66, 66);
   background: white;
   color: $color_select;
   cursor: pointer;
+  font-size: 1.5vw;
+  display: flex;
+  align-items: center;
+
+  @media(max-width: 550px){
+    min-height: 15px;
+    margin-top: 5vh;
+    padding: 1vh 1vh;
+    font-size: 1.5vh;
+    width: 70vw;
+  }
 }
 .currency_list__options{
   position: absolute;
-  top: 50px;
+  top: 4.3vw;
   left: 0px;
   height: fit-content;
-  border: 1px solid white;
+  border: 1px solid rgb(255, 255, 255);
   width: 30vw;
   box-sizing: border-box;
   border-radius: 5px;
@@ -172,16 +270,63 @@ $color_select: rgb(66, 66, 66);
   overflow: auto;
   max-height: 42vh;
   background: rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px gray;
+  @media(max-width: 550px){
+    top: 4.3vh;
+    max-height: 40vh;
+    width: 70vw;
+  }
 }
 .currency_list__option{
   box-shadow: 0 4px 2px -3px rgb(83, 180, 183);
   padding: 5px 5px;
   box-sizing: border-box;
   color: $color_select;
+  font-size: 1.5vw;
+
+  @media(max-width: 550px){
+    font-size: 1.5vh;
+  }
 }
 .currency_list__icons{
   position: absolute;
   top: 50%;
   right: 0px;
   transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+// currency_list
+.currency_list{
+  margin-top: 5vh;
+  width: 30vw;
+  height: fit-content;
+  border-radius: 5px;
+  overflow: hidden;
+  @media(max-width: 550px){
+    margin-top: 3vh;
+    width: 70vw;
+  }
+}
+.currency_item{
+  display: flex;
+  font-size: 1.5vw;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: $color_select;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  @media(max-width: 550px){
+    font-size: 1.5vh;
+  }
+}
+.icons_info{
+  margin-right: 1vw;
+  font-size: 3vw;
+  cursor: pointer;
+
+  @media(max-width: 550px){
+    font-size: 3vh;
+  }
 }

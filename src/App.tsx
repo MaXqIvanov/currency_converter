@@ -11,14 +11,8 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-          <Route
-            path={'/'}
-            element={<CurrencyConverter />}
-          />
-          <Route
-            path={'/exchange_rates'}
-            element={<ExchangeRates />}
-          />
+        <Route path={'/'} element={<CurrencyConverter />} />
+        <Route path={'/exchange_rates'} element={<ExchangeRates />} />
       </Routes>
     </div>
   );
