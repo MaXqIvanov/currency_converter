@@ -4,11 +4,19 @@ import { GetCurrentRate } from '../redux/reducers/converter/ActionConverter'
 import { FaEquals } from 'react-icons/fa'
 import { clearCurrentCurrencyValue } from '../redux/reducers/converter/ConverterSlice'
 import { ImSpinner } from 'react-icons/im'
+import { FcInfo } from 'react-icons/fc'
+import { GetExchangeRates } from '../redux/reducers/exchange_rates/ActionExchange'
+import useClickOutSide from '../hooks/useClickOutSide'
+
 export const CurrencyConverter = () => {
   const [currency_value, setCurrencyValue] = useState<string>('')
   const dispatch = useAppDispatch()
   const {current_currency_value, loading_currency, error} = useAppSelector((state)=> state.converter)
-
+  const {currency_list_group} = useAppSelector((state)=> state.exchange)
+  const [is_visible_info, setIsVisibleInfo] = useState<boolean>(false)
+  const infoRef = useClickOutSide(()=> {
+    setIsVisibleInfo(false)
+  })
   const handlerCurrencyValue = (value: string)=> {
     let input_value = value.split(' ')
     if(input_value.length === 1){
@@ -40,14 +48,32 @@ export const CurrencyConverter = () => {
     }
   }
 
+  useEffect(() => {
+    if(currency_list_group.length === 0){
+      dispatch(GetExchangeRates())
+    }
+  }, [])
+  
+
   
   
   return (
     <div className='currency_converter'>
       <div className='currency_converter__wrapper'>
+        <div onClick={()=> setIsVisibleInfo(true)} className='info_block'>
+          <FcInfo title='Узнать возможные валютные пары' className='icons_info'/>
+          {is_visible_info &&
+            <div ref={infoRef} className="info_block__items">
+              {currency_list_group?.length > 0 && currency_list_group.map((item: string)=>
+              <div>
+                {item.split('')[0]+item.split('')[1]+item.split('')[2] + " - " + item.split('')[3]+item.split('')[4]+item.split('')[5]}
+              </div>)}
+            </div>}
+        </div>
         <input value={currency_value} onChange={(e)=> handlerCurrencyValue(e.target.value)} className='custom_input' placeholder='15 usd in eth'/>
         <FaEquals className='icon_equals'/>
-        <div className='currency_converter__results'>{current_currency_value}
+        <div className='currency_converter__results'>
+          {current_currency_value}
           {loading_currency && <ImSpinner className='spinner'/>}
         </div>
         {error && <div className='error'>{error}</div>}
